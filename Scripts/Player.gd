@@ -49,16 +49,19 @@ func walking(delta) -> void:
 
 
 func idle(delta) -> void:
-	var _i = readMovement()
-	if _i != Vector2.ZERO:
-		state = STATES.WALKING
-	else:
-		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+	if self.visible:
+		var _i = readMovement()
+		if _i != Vector2.ZERO:
+			state = STATES.WALKING
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	if Input.is_action_just_pressed("ui_accept"):
 		if MainInventoryBox.visible:
 			MainInventoryBox.visible = false
+			self.visible = true
 		else:
 			MainInventoryBox.visible = true
+			self.visible = false
 
 
 
