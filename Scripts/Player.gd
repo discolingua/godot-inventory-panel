@@ -2,7 +2,7 @@ class_name Player
 extends KinematicBody2D
 
 # initialize state machine
-enum STATES {IDLE, WALKING}
+enum STATES {IDLE, WALKING, INVENTORY}
 
 const ACCELERATION = 600
 const MAX_SPEED = 100
@@ -26,6 +26,7 @@ func _physics_process(delta) -> void:
 	match state:
 		STATES.IDLE: idle(delta)
 		STATES.WALKING: walking(delta)
+		STATES.INVENTORY: manageInventory()
 
 
 func readMovement() -> Vector2:
@@ -56,13 +57,12 @@ func idle(delta) -> void:
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	if Input.is_action_just_pressed("ui_accept"):
-		if MainInventoryBox.visible:
-			MainInventoryBox.visible = false
-			self.visible = true
-		else:
 			MainInventoryBox.visible = true
 			self.visible = false
+			state = STATES.INVENTORY
 
-
-
-
+func manageInventory() -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		MainInventoryBox.visible = false
+		self.visible = true
+		state = STATES.IDLE
