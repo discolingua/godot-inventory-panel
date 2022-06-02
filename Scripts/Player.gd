@@ -1,6 +1,5 @@
 class_name Player
 extends KinematicBody2D
-# the main player character and tool spawner
 
 # initialize state machine
 enum STATES {IDLE, WALKING}
@@ -32,10 +31,7 @@ func readMovement() -> Vector2:
 	_i.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 
 	# normalize vector fixes fast/distorted diagonals
-	_i = _i.normalized()
-	print (_i.x)
-	print (_i.y)
-	return _i
+	return _i.normalized()
 
 
 func walking(delta) -> void:
