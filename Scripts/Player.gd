@@ -18,6 +18,10 @@ var lastVelocity : Vector2 = Vector2.ZERO
 
 onready var MainInventoryBox : Control = get_node("/root/GameWorld/GUI")
 
+func _ready() -> void:
+	MainInventoryBox.visible = false
+
+
 func _physics_process(delta) -> void:
 	match state:
 		STATES.IDLE: idle(delta)

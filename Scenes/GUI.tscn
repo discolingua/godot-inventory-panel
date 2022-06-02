@@ -14,13 +14,13 @@ __meta__ = {
 [node name="crInventoryPanel" type="ColorRect" parent="."]
 anchor_left = -0.036
 anchor_top = -0.047
-anchor_right = 0.959
-anchor_bottom = 0.913
-margin_left = -0.00799942
-margin_top = 0.00300026
-margin_right = 3.10199
-margin_bottom = -0.0370026
-color = Color( 0.431373, 0.360784, 0.360784, 1 )
+anchor_right = 0.622
+anchor_bottom = 0.933
+margin_left = -0.00800037
+margin_top = 0.00299978
+margin_right = -0.0840149
+margin_bottom = -3.017
+color = Color( 0.1995, 0.35, 0.217058, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
