@@ -12,17 +12,22 @@ __meta__ = {
 }
 
 [node name="crInventoryPanel" type="ColorRect" parent="."]
-anchor_right = 0.995
-anchor_bottom = 0.96
-margin_right = 0.109985
-margin_bottom = -0.0400085
+anchor_left = -0.036
+anchor_top = -0.047
+anchor_right = 0.959
+anchor_bottom = 0.913
+margin_left = -0.00799942
+margin_top = 0.00300026
+margin_right = 3.10199
+margin_bottom = -0.0370026
 color = Color( 0.431373, 0.360784, 0.360784, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="sprGrid" type="Sprite" parent="."]
 position = Vector2( 0, -1.00001 )
-scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
 centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 128, 128 )
