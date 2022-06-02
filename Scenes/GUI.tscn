@@ -1,0 +1,20 @@
+[gd_scene format=2]
+
+[node name="GUI" type="Control"]
+margin_left = 49.0
+margin_top = 19.0
+margin_right = 271.0
+margin_bottom = 168.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="crInventoryPanel" type="ColorRect" parent="."]
+anchor_right = 0.995
+anchor_bottom = 0.96
+margin_right = 0.109985
+margin_bottom = -0.0400085
+color = Color( 0.643137, 0.380392, 0.380392, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
