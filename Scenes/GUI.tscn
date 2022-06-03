@@ -23,17 +23,10 @@ margin_left = -0.00800037
 margin_top = 0.00299978
 margin_right = -0.0840149
 margin_bottom = -3.017
-color = Color( 0.1995, 0.35, 0.217058, 1 )
+color = Color( 0.631373, 0.623529, 0.486275, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="sprGrid" type="Sprite" parent="."]
-position = Vector2( 0, -1.00001 )
-texture = ExtResource( 1 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 128, 128 )
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( -8, -7 )
@@ -41,3 +34,10 @@ position = Vector2( -8, -7 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 73, 72 )
 shape = SubResource( 1 )
+
+[node name="sprGrid" type="Sprite" parent="Area2D"]
+position = Vector2( 8, 5.99999 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 128, 128 )

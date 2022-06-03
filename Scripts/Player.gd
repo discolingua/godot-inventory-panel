@@ -8,8 +8,10 @@ const ACCELERATION = 600
 const MAX_SPEED = 100
 const FRICTION = 800
 
+export var cursorTexture : ImageTexture = ImageTexture.new()
 
 var state : int = STATES.IDLE
+
 
 # store most recent non-zero movement input for setting attack direction
 var velocity : Vector2 = Vector2.ZERO
@@ -43,7 +45,7 @@ func walking(delta) -> void:
 	var _i = readMovement()
 	if _i != Vector2.ZERO:
 		lastVelocity = _i
-		velocity = move_and_slide(_i * MAX_SPEED)
+		velocity += move_and_slide(_i * MAX_SPEED)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		state = STATES.IDLE
@@ -60,6 +62,7 @@ func idle(delta) -> void:
 			MainInventoryBox.visible = true
 			self.visible = false
 			state = STATES.INVENTORY
+
 
 func manageInventory() -> void:
 	if Input.is_action_just_pressed("ui_accept"):

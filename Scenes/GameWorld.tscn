@@ -6,11 +6,11 @@
 
 [node name="GameWorld" type="Node2D"]
 
-[node name="BackGround" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 margin_right = 320.0
 margin_bottom = 240.0
 mouse_filter = 2
-color = Color( 0.0941176, 0.152941, 0.0705882, 1 )
+color = Color( 0.227451, 0.376471, 0.290196, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -18,7 +18,6 @@ __meta__ = {
 [node name="GUI" parent="." instance=ExtResource( 2 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-visible = true
 position = Vector2( 241, 157 )
 
 [node name="Potion" parent="." instance=ExtResource( 3 )]
