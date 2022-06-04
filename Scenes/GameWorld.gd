@@ -4,6 +4,7 @@ extends Node2D
 const COLUMNS = 4
 const ROWS = 4
 const CELL_SIZE = 32
+const MARGIN = 8
 
 var inventoryGridContents : Array = []
 
@@ -20,20 +21,14 @@ func _input(event):
 	if event is InputEventMouseButton \
 	and event.button_index == BUTTON_LEFT \
 	and event.is_pressed():
-		print (get_viewport().get_mouse_position())
-
-
-func _physics_process(_delta) -> void:
-	var _i : Vector2 = get_viewport().get_mouse_position()
+		print (getCell(get_viewport().get_mouse_position()))
 
 
 
-func getCell(_clickSpot : Vector2) -> Vector2:
-	var collideGrid : Node2D = get_node("GUI/Area2D")
-	print(collideGrid.position)
-	var gridOffset : Vector2 = Vector2.ZERO
-	gridOffset.x = collideGrid.position.x - 64  # magic number fix this
-	gridOffset.y = collideGrid.position.y - 64
-	print(gridOffset)
-	return collideGrid.position
-
+func getCell(clickSpot : Vector2) -> Vector2:
+	var gridPosition : Vector2 = $GUI.rect_position
+	var marginOffset : Vector2 = Vector2(MARGIN, MARGIN)
+	var invCoords : Vector2 = clickSpot - gridPosition - marginOffset
+	var clickColumn = int(invCoords.x / CELL_SIZE)
+	var clickRow = int(invCoords.y / CELL_SIZE)
+	return Vector2(clickRow, clickColumn)
