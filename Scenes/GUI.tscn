@@ -3,41 +3,42 @@
 [ext_resource path="res://Images/32x-bk-grid.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 73, 71 )
+extents = Vector2( 64, 64 )
 
 [node name="GUI" type="Control"]
-margin_left = 49.0
-margin_top = 19.0
-margin_right = 271.0
-margin_bottom = 168.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -72.0
+margin_top = -72.0
+margin_right = 72.0
+margin_bottom = 72.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="crInventoryPanel" type="ColorRect" parent="."]
-anchor_left = -0.036
-anchor_top = -0.047
-anchor_right = 0.622
-anchor_bottom = 0.933
-margin_left = -0.00800037
-margin_top = 0.00299978
-margin_right = -0.0840149
-margin_bottom = -3.017
-color = Color( 0.631373, 0.623529, 0.486275, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -72.0
+margin_top = -72.0
+margin_right = 72.0
+margin_bottom = 72.0
+color = Color( 0.54902, 0.529412, 0.192157, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2( -8, -7 )
+position = Vector2( 72, 72 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 73, 72 )
 shape = SubResource( 1 )
 
 [node name="sprGrid" type="Sprite" parent="Area2D"]
-position = Vector2( 8, 5.99999 )
 texture = ExtResource( 1 )
-centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 128, 128 )

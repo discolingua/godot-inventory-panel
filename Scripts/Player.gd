@@ -32,7 +32,7 @@ func _physics_process(delta) -> void:
 
 
 func readMovement() -> Vector2:
-	var _i = Vector2.ZERO
+	var _i : Vector2 = Vector2.ZERO
 
 	_i.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	_i.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
@@ -42,7 +42,7 @@ func readMovement() -> Vector2:
 
 
 func walking(delta) -> void:
-	var _i = readMovement()
+	var _i : Vector2 = readMovement()
 	if _i != Vector2.ZERO:
 		lastVelocity = _i
 		velocity += move_and_slide(_i * MAX_SPEED)
@@ -52,11 +52,10 @@ func walking(delta) -> void:
 
 
 func idle(delta) -> void:
-	if self.visible:
-		var _i = readMovement()
-		if _i != Vector2.ZERO:
-			state = STATES.WALKING
-		else:
+	var _i = readMovement()
+	if _i != Vector2.ZERO:
+		state = STATES.WALKING
+	else:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	if Input.is_action_just_pressed("ui_accept"):
 			MainInventoryBox.visible = true
