@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "GameWorld",
 "language": "GDScript",
-"path": "res://Scenes/GameWorld.gd"
+"path": "res://Scripts/GameWorld.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",

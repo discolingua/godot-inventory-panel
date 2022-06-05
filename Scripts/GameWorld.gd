@@ -37,13 +37,20 @@ func _input(event):
 	if event is InputEventMouseButton \
 		and event.button_index == BUTTON_LEFT \
 		and event.is_pressed():
+
+			# get the coords of the clicked cell
 			var cellNumber = getCellIndex(get_viewport().get_mouse_position())
-			var cellCoordinates = getCellCoordinates(cellNumber)
-			clearTiles()
-			var clickedCell = GridCell.instance()
-			clickedCell.rect_position = cellCoordinates
-			clickedCell.rect_size = Vector2(CELL_SIZE, CELL_SIZE)
-			add_child(clickedCell)
+			addGridItem(cellNumber)
+
+
+# add an item to a specific cell of the grid
+func addGridItem( cell : int ) -> void:
+	clearTiles()
+	var cellToAdd = GridCell.instance()
+	cellToAdd.rect_position = getCellCoordinates(cell)
+	cellToAdd.rect_size = Vector2(CELL_SIZE, CELL_SIZE)
+	add_child(cellToAdd)
+
 
 
 # clear all inventory tiles before redraw
