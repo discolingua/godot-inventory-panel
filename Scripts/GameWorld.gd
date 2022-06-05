@@ -40,26 +40,25 @@ func _input(event):
 
 			# get the coords of the clicked cell
 			var cellNumber = getCellIndex(get_viewport().get_mouse_position())
-			addGridItem(cellNumber)
+
+			# add item index to the inventory grid array,then redraw the grid
+			print("assigning to "+ str(cellNumber))
+			inventoryGridContents[cellNumber] = 1
+			gridRedraw()
 
 
 # add an item to a specific cell of the grid
 func addGridItem( cell : int ) -> void:
-	clearTiles()
 	var cellToAdd = GridCell.instance()
 	cellToAdd.rect_position = getCellCoordinates(cell)
 	cellToAdd.rect_size = Vector2(CELL_SIZE, CELL_SIZE)
 	add_child(cellToAdd)
 
 
-
 # clear all inventory tiles before redraw
 func clearTiles() -> void:
 	for tile in get_tree().get_nodes_in_group("inventoryTiles"):
 		tile.queue_free()
-
-
-
 
 
 # translates raw x-y mouse click coordinates to cell number (0-15)
@@ -70,10 +69,18 @@ func getCellIndex(clickSpot : Vector2) -> int:
 	return clickRow * GRID_COLUMNS + clickColumn
 
 
-# translates linear cell number to xy coords of that cell
+# translates linear cell number to x-y coords of that cell
 func getCellCoordinates (cellNumber : int) -> Vector2:
 	var _y = int(float(cellNumber) / GRID_ROWS)
 	var _x = int(cellNumber % GRID_ROWS)
 	_x = _x * CELL_SIZE + gridPosition.x + marginOffset.x
 	_y = _y * CELL_SIZE + gridPosition.y + marginOffset.y
 	return Vector2(_x,_y)
+
+
+func gridRedraw() -> void:
+	clearTiles()
+	for _i in range(0, inventoryGridContents.size()):
+		if inventoryGridContents[_i] > 0:
+			print ("drawing " + str(_i))
+			addGridItem(_i)
