@@ -39,13 +39,23 @@ func _input(event):
 		and event.is_pressed():
 			var cellNumber = getCellIndex(get_viewport().get_mouse_position())
 			var cellCoordinates = getCellCoordinates(cellNumber)
-			print (cellCoordinates)
+			clearTiles()
 			var clickedCell = GridCell.instance()
 			clickedCell.rect_position = cellCoordinates
 			clickedCell.rect_size = Vector2(CELL_SIZE, CELL_SIZE)
 			add_child(clickedCell)
 
 
+# clear all inventory tiles before redraw
+func clearTiles() -> void:
+	for tile in get_tree().get_nodes_in_group("inventoryTiles"):
+		tile.queue_free()
+
+
+
+
+
+# translates raw x-y mouse click coordinates to cell number (0-15)
 func getCellIndex(clickSpot : Vector2) -> int:
 	var invCoords : Vector2 = clickSpot - gridPosition - marginOffset
 	var clickColumn = int(invCoords.x / CELL_SIZE)
@@ -53,6 +63,7 @@ func getCellIndex(clickSpot : Vector2) -> int:
 	return clickRow * GRID_COLUMNS + clickColumn
 
 
+# translates linear cell number to xy coords of that cell
 func getCellCoordinates (cellNumber : int) -> Vector2:
 	var _y = int(float(cellNumber) / GRID_ROWS)
 	var _x = int(cellNumber % GRID_ROWS)
