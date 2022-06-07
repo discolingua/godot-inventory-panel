@@ -33,7 +33,7 @@ const itemScenes : Array = [
 export var grabbedItem : int
 
 # serialized 1D array of grid cells, e.g. a 4x4 grid = indices 0-15
-var inventoryGridContents : Array = []
+var inventoryGridCells : Array = []
 const itemSceneIndex : Array =  []
 
 # x-y coordinates of the top left corner of panel
@@ -44,7 +44,7 @@ func _ready():
 
 	# initialize the item grid array with all zeroes
 	for _i in range(0,GRID_COLUMNS * GRID_ROWS):
-		inventoryGridContents.append(0)
+		inventoryGridCells.append(0)
 
 	# load the packed scenes for the items in the index
 	for _i in range(0,ITEMS.size()):
@@ -69,7 +69,7 @@ func _input(event):
 
 				# set item index in the inventory grid array,then redraw the grid
 				print("assigning to "+ str(cellNumber))
-				inventoryGridContents[cellNumber] = 2
+				inventoryGridCells[cellNumber] = 2
 				gridRedraw()
 
 
@@ -122,7 +122,7 @@ func getCellCoordinates (cellNumber : int) -> Vector2:
 # clear and then redraw all grid cells
 func gridRedraw() -> void:
 	clearTiles()
-	for _i in range(0, inventoryGridContents.size()):
-		if inventoryGridContents[_i] > 0:
+	for _i in range(0, inventoryGridCells.size()):
+		if inventoryGridCells[_i] > 0:
 			print ("drawing " + str(_i))
-			addGridItem(_i, inventoryGridContents[_i])
+			addGridItem(_i, inventoryGridCells[_i])
