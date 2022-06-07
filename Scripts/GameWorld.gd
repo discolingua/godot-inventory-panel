@@ -11,8 +11,11 @@ const GRID_ROWS = 4
 const CELL_SIZE = 32
 const MARGIN = 8
 
-# marginOffset is the amount of padding around the edges of the grid
+# amount of padding around the edges of the grid
 const marginOffset : Vector2 = Vector2(MARGIN, MARGIN)
+
+# offset to adjust center-aligned nodes
+const originOffset : Vector2 = Vector2( CELL_SIZE / 2, CELL_SIZE / 2)
 
 enum ITEMS {
 	EMPTY = 0,
@@ -23,18 +26,15 @@ enum ITEMS {
 const itemScenes : Array = [
 	"res://Scenes/GridCell.tscn",
 	"res://Scenes/GridCell.tscn",
-	"res://Scenes/GridCell.tscn",
+	"res://Scenes/Potion.tscn",
 ]
 
 # index of the item grabbed by the mouse cursor
 export var grabbedItem : int
 
-# grid cells are serialized into a 1D array, e.g. a 4x4 grid = indices 0-15
+# serialized 1D array of grid cells, e.g. a 4x4 grid = indices 0-15
 var inventoryGridContents : Array = []
-var itemSceneIndex : Array =  []
-
-# grid square node for image in the grid
-const GridCell : PackedScene = preload("res://Scenes/GridCell.tscn")
+const itemSceneIndex : Array =  []
 
 # x-y coordinates of the top left corner of panel
 onready var gridPosition : Vector2 = $GUI.rect_position
@@ -56,21 +56,45 @@ func _input(event):
 		and event.button_index == BUTTON_LEFT \
 		and event.is_pressed():
 
-			# get the coords of the clicked cell
-			var cellNumber = getCellIndex(get_viewport().get_mouse_position())
+			var clickSpot : Vector2 = get_viewport().get_mouse_position()
 
-			# add item index to the inventory grid array,then redraw the grid
-			print("assigning to "+ str(cellNumber))
-			inventoryGridContents[cellNumber] = 1
-			gridRedraw()
+			# set click measurements relative to the top left corner of the inv grid
+			var clickCoords : Vector2 = clickSpot - gridPosition - marginOffset
+
+			# ignore click unless it's inside a grid cell
+			if boundsCheck(clickCoords):
+
+				# get the coords of the clicked cell
+				var cellNumber = getCellIndex(clickCoords)
+
+				# set item index in the inventory grid array,then redraw the grid
+				print("assigning to "+ str(cellNumber))
+				inventoryGridContents[cellNumber] = 2
+				gridRedraw()
 
 
-# add an item to a specific cell of the grid
+# add an item (packed scene) to a specific cell of the grid
 func addGridItem( cell : int, itemIndex : int ) -> void:
+
+	# Look up the item in the index to get a node to instantiate
 	var cellToAdd = itemSceneIndex[itemIndex].instance()
-	cellToAdd.rect_position = getCellCoordinates(cell)
-	cellToAdd.rect_size = Vector2(CELL_SIZE, CELL_SIZE)
+	cellToAdd.position = getCellCoordinates(cell) + originOffset
+
+	# remove any executable code attached to the node
+	cellToAdd.set_script(null)
+
 	add_child(cellToAdd)
+
+# check if mouse pointer is hovering over a valid grid cell
+func boundsCheck(_clickCoords : Vector2) -> bool:
+
+	if _clickCoords.x < 0 or _clickCoords.y < 0 \
+			or _clickCoords.x > CELL_SIZE * GRID_COLUMNS \
+			or _clickCoords.y > CELL_SIZE * GRID_ROWS:
+		return false
+	else:
+		return true
+
 
 
 # set all inventory tiles to 0 (empty)
@@ -80,10 +104,9 @@ func clearTiles() -> void:
 
 
 # translates raw x-y mouse click coordinates to cell number (0-15)
-func getCellIndex(clickSpot : Vector2) -> int:
-	var invCoords : Vector2 = clickSpot - gridPosition - marginOffset
-	var clickColumn = int(invCoords.x / CELL_SIZE)
-	var clickRow = int(invCoords.y / CELL_SIZE)
+func getCellIndex(clickCoords : Vector2) -> int:
+	var clickColumn = int(clickCoords.x / CELL_SIZE)
+	var clickRow = int(clickCoords.y / CELL_SIZE)
 	return clickRow * GRID_COLUMNS + clickColumn
 
 
@@ -102,4 +125,4 @@ func gridRedraw() -> void:
 	for _i in range(0, inventoryGridContents.size()):
 		if inventoryGridContents[_i] > 0:
 			print ("drawing " + str(_i))
-			addGridItem(_i, 1)
+			addGridItem(_i, inventoryGridContents[_i])
