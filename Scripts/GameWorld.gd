@@ -3,8 +3,6 @@ extends Node2D
 # Main helper class for handling the inventory grid
 
 
-
-
 # geometry of inventory panel
 const GRID_COLUMNS = 4
 const GRID_ROWS = 4
@@ -17,24 +15,29 @@ const marginOffset : Vector2 = Vector2(MARGIN, MARGIN)
 # offset to adjust center-aligned nodes
 const originOffset : Vector2 = Vector2( CELL_SIZE / 2, CELL_SIZE / 2)
 
-enum ITEMS {
-	EMPTY = 0,
-	SOLID_TILE = 1,
-	POTION = 2
-}
-
+# list of scenes which get loaded into itemSceneIndex Array
 const itemScenes : Array = [
 	"res://Scenes/GridCell.tscn",
 	"res://Scenes/GridCell.tscn",
 	"res://Scenes/Potion.tscn",
 ]
 
+# contains the loaded PackedScenes listed in itemScenes
+const itemSceneIndex : Array =  []
+
+
+enum ITEMS {
+	EMPTY = 0,
+	SOLID_TILE = 1,
+	POTION = 2
+}
+
+
 # index of the item grabbed by the mouse cursor
 export var grabbedItem : int
 
 # serialized 1D array of grid cells, e.g. a 4x4 grid = indices 0-15
 var inventoryGridCells : Array = []
-const itemSceneIndex : Array =  []
 
 # x-y coordinates of the top left corner of panel
 onready var gridPosition : Vector2 = $GUI.rect_position
@@ -51,6 +54,7 @@ func _ready():
 		itemSceneIndex.append(load(itemScenes[_i]))
 
 
+# the core grid logic is contained in the mouse click listener
 func _input(event):
 	if event is InputEventMouseButton \
 		and event.button_index == BUTTON_LEFT \
@@ -67,9 +71,12 @@ func _input(event):
 				# get the coords of the clicked cell
 				var cellNumber = getCellIndex(clickCoords)
 
-				# set item index in the inventory grid array,then redraw the grid
-				print("assigning to "+ str(cellNumber))
-				inventoryGridCells[cellNumber] = 2
+				# set or clear the cell contents + redraw grid
+				if inventoryGridCells[cellNumber] != 0 :
+					print("clear")
+					inventoryGridCells[cellNumber] = 0
+				else:
+					inventoryGridCells[cellNumber] = 2
 				gridRedraw()
 
 
@@ -83,6 +90,9 @@ func addGridItem( cell : int, itemIndex : int ) -> void:
 	# remove any executable code attached to the node
 	cellToAdd.set_script(null)
 
+	# add the tile to culling group
+	cellToAdd.add_to_group("inventoryTiles")
+
 	add_child(cellToAdd)
 
 # check if mouse pointer is hovering over a valid grid cell
@@ -94,7 +104,6 @@ func boundsCheck(_clickCoords : Vector2) -> bool:
 		return false
 	else:
 		return true
-
 
 
 # set all inventory tiles to 0 (empty)
@@ -124,5 +133,4 @@ func gridRedraw() -> void:
 	clearTiles()
 	for _i in range(0, inventoryGridCells.size()):
 		if inventoryGridCells[_i] > 0:
-			print ("drawing " + str(_i))
 			addGridItem(_i, inventoryGridCells[_i])
