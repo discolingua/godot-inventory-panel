@@ -9,15 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://Scripts/Bullet.gd"
+}, {
 "base": "Node2D",
 "class": "GameWorld",
 "language": "GDScript",
 "path": "res://Scripts/GameWorld.gd"
 }, {
-"base": "Area2D",
-"class": "GuiCollider",
+"base": "KinematicBody2D",
+"class": "Mob",
 "language": "GDScript",
-"path": "res://Scenes/GuiCollider.gd"
+"path": "res://Scripts/Mob.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
@@ -30,8 +35,9 @@ _global_script_classes=[ {
 "path": "res://Scripts/Potion.gd"
 } ]
 _global_script_class_icons={
+"Bullet": "",
 "GameWorld": "",
-"GuiCollider": "",
+"Mob": "",
 "Player": "",
 "Potion": ""
 }

@@ -73,7 +73,7 @@ func _input(event):
 
 				# set or clear the cell contents + redraw grid
 				if inventoryGridCells[cellNumber] != 0 :
-					print("clear")
+
 					inventoryGridCells[cellNumber] = 0
 				else:
 					inventoryGridCells[cellNumber] = 2

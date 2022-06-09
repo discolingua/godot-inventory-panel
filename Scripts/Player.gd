@@ -12,6 +12,7 @@ export var cursorTexture : ImageTexture = ImageTexture.new()
 
 var state : int = STATES.IDLE
 
+var Bullet : PackedScene = preload("res://Scenes/Bullet.tscn")
 
 # store most recent non-zero movement input for setting attack direction
 var velocity : Vector2 = Vector2.ZERO
@@ -61,6 +62,11 @@ func idle(delta) -> void:
 			MainInventoryBox.visible = true
 			self.visible = false
 			state = STATES.INVENTORY
+	if Input.is_key_pressed(KEY_A):
+		print("blep")
+		var bullet : Area2D =  Bullet.instance()
+		add_child(bullet)
+
 
 
 func manageInventory() -> void:
