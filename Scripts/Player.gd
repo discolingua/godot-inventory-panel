@@ -65,7 +65,9 @@ func idle(delta) -> void:
 	if Input.is_key_pressed(KEY_A):
 		print("blep")
 		var bullet : Area2D =  Bullet.instance()
-		add_child(bullet)
+		bullet.position = self.position
+		bullet.velocity = Vector2(-10,0)
+		get_parent().add_child(bullet)
 
 
 
