@@ -66,7 +66,7 @@ func idle(delta) -> void:
 		print("blep")
 		var bullet : Area2D =  Bullet.instance()
 		bullet.position = self.position
-		bullet.velocity = Vector2(-10,0)
+		bullet.speed = Vector2(-30, 0)
 		get_parent().add_child(bullet)
 
 
