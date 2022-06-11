@@ -16,8 +16,9 @@ func _physics_process(_delta):
 
 
 func _on_SeekRadius_body_entered(body:Node2D):
-    print("enter seek")
-    player = body
+    print("seek " + body.name)
+    if body.name == "Player":
+        player = body
 
 
 func _on_SeekRadius_body_exited(_body:Node2D):

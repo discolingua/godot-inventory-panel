@@ -20,3 +20,4 @@ func _physics_process(delta):
 func _on_Bullet_body_entered( _body : KinematicBody2D):
 	if _body.is_in_group("Mobs"):
 		print("bullet signal")
+		_body.queue_free()

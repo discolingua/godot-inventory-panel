@@ -34,20 +34,20 @@ animations = [ {
 radius = 51.0882
 
 [sub_resource type="CapsuleShape2D" id=6]
-radius = 24.0
-height = 82.0
+radius = 15.0
+height = 14.0
 
 [node name="Mob" type="KinematicBody2D"]
 position = Vector2( 1, -4 )
 script = ExtResource( 2 )
 
 [node name="BoundingBox" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 8 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
 animation = "New Anim"
+frame = 3
 playing = true
 
 [node name="SeekRadius" type="Area2D" parent="."]
