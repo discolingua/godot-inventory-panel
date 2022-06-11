@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Particles2D",
+"class": "BloodSplat",
+"language": "GDScript",
+"path": "res://Scripts/Bloodsplat.gd"
+}, {
 "base": "Area2D",
 "class": "Bullet",
 "language": "GDScript",
@@ -40,6 +45,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Potion.gd"
 } ]
 _global_script_class_icons={
+"BloodSplat": "",
 "Bullet": "",
 "GameWorld": "",
 "Mob": "",

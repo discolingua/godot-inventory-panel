@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Bloodsplat.gd" type="Script" id=1]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 5
@@ -25,3 +27,4 @@ explosiveness = 0.33
 randomness = 0.33
 process_material = SubResource( 1 )
 texture = SubResource( 3 )
+script = ExtResource( 1 )
