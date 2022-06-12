@@ -1,5 +1,5 @@
 class_name BloodSplat
-extends Particles2D
+extends Area2D
 
 var speed : Vector2 = Vector2.ZERO
 
@@ -8,3 +8,6 @@ func _ready():
 
 func _physics_process(delta):
 	position += speed * delta
+
+func _on_Timer_timeout():
+	queue_free()

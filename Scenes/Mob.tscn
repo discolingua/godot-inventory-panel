@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Images/steam-lords-creature.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Mob.gd" type="Script" id=2]
@@ -30,14 +30,11 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=7]
-radius = 51.0882
-
 [sub_resource type="CapsuleShape2D" id=6]
 radius = 15.0
 height = 14.0
 
-[node name="Mob" type="KinematicBody2D"]
+[node name="Mob" type="KinematicBody2D" groups=["Mobs"]]
 position = Vector2( 1, -4 )
 script = ExtResource( 2 )
 
@@ -47,14 +44,8 @@ shape = SubResource( 8 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
 animation = "New Anim"
-frame = 3
+frame = 1
 playing = true
-
-[node name="SeekRadius" type="Area2D" parent="."]
-
-[node name="SeekCollider" type="CollisionShape2D" parent="SeekRadius"]
-position = Vector2( -1, 4 )
-shape = SubResource( 7 )
 
 [node name="HitBoxArea2D" type="Area2D" parent="."]
 
@@ -62,6 +53,5 @@ shape = SubResource( 7 )
 position = Vector2( 0, 2 )
 shape = SubResource( 6 )
 
-[connection signal="body_entered" from="SeekRadius" to="." method="_on_SeekRadius_body_entered"]
-[connection signal="body_exited" from="SeekRadius" to="." method="_on_SeekRadius_body_exited"]
+[connection signal="tree_exited" from="." to="." method="_on_Mob_tree_exited"]
 [connection signal="body_entered" from="HitBoxArea2D" to="." method="_on_HitBoxArea2D_body_entered"]

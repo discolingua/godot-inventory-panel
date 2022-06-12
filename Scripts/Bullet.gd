@@ -19,6 +19,9 @@ func _on_Bullet_body_entered( _body : KinematicBody2D):
 	if _body.is_in_group("Mobs"):
 		print("bullet signal")
 		var bloodSplat = BloodSplat.instance()
-		bloodSplat.speed = speed
+		bloodSplat.speed = Vector2(speed / 10)
+		bloodSplat.position = self.position
+		# call_deferred("set", "bloodSplat.speed", self.speed)
 		get_parent().add_child(bloodSplat)
 		_body.queue_free()
+		queue_free()

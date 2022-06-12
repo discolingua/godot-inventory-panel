@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Particles2D",
+"base": "Area2D",
 "class": "BloodSplat",
 "language": "GDScript",
 "path": "res://Scripts/Bloodsplat.gd"
@@ -43,6 +43,11 @@ _global_script_classes=[ {
 "class": "Potion",
 "language": "GDScript",
 "path": "res://Scripts/Potion.gd"
+}, {
+"base": "Area2D",
+"class": "Spawner",
+"language": "GDScript",
+"path": "res://Scenes/Spawner.gd"
 } ]
 _global_script_class_icons={
 "BloodSplat": "",
@@ -51,7 +56,8 @@ _global_script_class_icons={
 "Mob": "",
 "MyButton": "",
 "Player": "",
-"Potion": ""
+"Potion": "",
+"Spawner": ""
 }
 
 [application]
