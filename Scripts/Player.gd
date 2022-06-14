@@ -58,10 +58,10 @@ func idle(delta) -> void:
 		state = STATES.WALKING
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-	# if Input.is_action_just_pressed("ui_accept"):
-	# 	MainInventoryBox.visible = true
-	# 	self.visible = false
-	#	state = STATES.INVENTORY
+
+	if Input.is_action_just_pressed("ui_accept"):
+		state = STATES.INVENTORY
+
 	if Input.is_action_just_pressed("ui_focus_prev"):
 		throwKnife(Vector2(-300, 0))
 	if Input.is_action_just_pressed("ui_focus_next"):
@@ -69,10 +69,9 @@ func idle(delta) -> void:
 
 
 func manageInventory() -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		MainInventoryBox.visible = false
-		self.visible = true
-		state = STATES.IDLE
+	MainInventoryBox.visible = false
+	self.visible = true
+	state = STATES.IDLE
 
 func throwKnife(knifeSpeed:Vector2) -> void:
 	var bullet : Area2D =  Bullet.instance()

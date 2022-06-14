@@ -16,7 +16,7 @@ func _physics_process(delta):
 
 
 func _on_Bullet_body_entered( _body : KinematicBody2D):
-	if _body.is_in_group("Mobs"):
+	if _body is Mob:
 		var bloodSplat = BloodSplat.instance()
 		bloodSplat.speed = Vector2(speed / 10)
 		bloodSplat.position = self.position
