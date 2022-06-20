@@ -81,4 +81,4 @@ margin_right = 159.0
 margin_bottom = 160.0
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 241, 157 )
+position = Vector2( 43, 92 )

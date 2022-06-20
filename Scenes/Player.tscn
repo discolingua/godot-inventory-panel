@@ -1,17 +1,19 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://Images/colored-transparent-75.png" type="Texture" id=2]
+[ext_resource path="res://Images/side-scroll-ship.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 0.874997, 0.777781 )
+extents = Vector2( 0.1875, 0.777781 )
 
 [node name="Player" type="KinematicBody2D"]
+scale = Vector2( 2, 2 )
 collision_layer = 257
 collision_mask = 257
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1.81e-06, -0.500002 )
 rotation = 1.5708
 scale = Vector2( 8, 9 )
 shape = SubResource( 1 )
@@ -19,3 +21,6 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 z_index = 1000
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
