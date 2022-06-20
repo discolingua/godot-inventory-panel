@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/SideScrollLevel1.gd" type="Script" id=1]
+[ext_resource path="res://Maps/sidescroll1.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Spawner.tscn" type="PackedScene" id=3]
+
+[node name="SideScrollLevel1" type="StaticBody2D"]
+script = ExtResource( 1 )
+
+[node name="SideScrollMap1" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -3, 10, 1, 152, 81, 154, 81, 162, 176, 162, 175, 113, 268, 111, 269, 159, 313, 159, 314, 199, 317, 207, 369, 207, 372, 65, 414, 64, 411, 162, 559, 161, 565, 61, 609, 63, 608, 202, 865, 203, 867, 244, -8, 242 )
+
+[node name="Spawner" parent="CollisionPolygon2D" instance=ExtResource( 3 )]
+position = Vector2( 318, 112 )
+
+[node name="Spawner2" parent="CollisionPolygon2D" instance=ExtResource( 3 )]
+position = Vector2( 245, 71 )
